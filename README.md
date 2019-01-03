@@ -1,6 +1,6 @@
-##Curso node.js para iniciantes
+# Curso node.js para iniciantes
 
-#rodando o node
+## rodando o node
 ```
 $ npm .
 ```
@@ -14,9 +14,12 @@ $ npm index.js
 $ npm run dev
 ```
 
-Para o projeto será criado um diretório e um arquivo index.js para cada conceito
+Para o projeto serÃ¡ criado um diretÃ³rio e um arquivo index.js para cada conceito
 
 <h2>Exemplo: eventos com a classe EventEmitter </h2>
 ```
 $ npm run dev:event
 ```
+
+# ReferÃªncia
+Curso de node.js https://cursos.nodebr.org/courses
