@@ -71,6 +71,28 @@ main(); // chama a função criada
         
         console.timeEnd('medida - promise');
 
+
+         /** 2º forma de fazer */
+        //medir a chamada das funções
+        // console.time('medida - promise');
+        // const usuario = await obterUsuario();
+
+        // const resultado = await Promise.all([
+        //     obterTelefone(usuario.id),
+        //     obterEnderecoAsync(usuario.id)
+        // ])
+        
+        // const endereco = resultado[1];
+        // const telefone = resultado[0];
+
+        // console.log(`
+        //                 Nome: ${usuario.nome},
+        //                 Endereco: ${endereco.rua}, ${endereco.numero},
+        //                 Telefone: ${telefone.ddd} - ${telefone.numero}
+        //             `);
+        
+        // console.timeEnd('medida - promise');
+
     } catch (error) {
         console.error("Deu ruim ",error);
     }
