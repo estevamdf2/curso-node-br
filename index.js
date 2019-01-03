@@ -51,44 +51,70 @@ const obterEnderecoAsync = util.promisify(obterEndereco);
      console.log('usuario',usuario);
  }
 
- const usuarioPromise = obterUsuario();
- //Para manipular com sucesso usar .then
- //Para manipular com erros usar .catch
- usuarioPromise
-    .then(function(usuario){
-        return obterTelefone(usuario.id)
-        .then(function resolverTelefone(result){
-            return {
-                usuario: {
-                    id: usuario.id,
-                    nome: usuario.nome
-                },
-                telefone: result 
-            }
-        })
-    })
-    .then(function (resultado){
-        const endereco = obterEnderecoAsync(resultado.usuario.id)
-        return endereco.then(function resolverEndereco(result){
-            return {
-                usuario: resultado.usuario,
-                telefone : resultado.telefone,
-                endereco: result
-            }
-        })
-    })
-    .then(function(resultado){
-       //console.log('resultado', resultado);
-       console.log(`
-                Nome: ${resultado.usuario.nome},
-                Endereco: ${resultado.endereco.rua}, ${resultado.endereco.numero},
-                Telefone: ${resultado.telefone.ddd} - ${resultado.telefone.numero}
-            `);
-    })
-    //caso de erro cai neste geral
-    .catch(function(error){
-        console.error('erro usuario ', error);
-    })
+ // 1º passo adicionar a palavra async -> automaticamente ele retornará uma Promisse
+main(); // chama a função criada
+ async function main(){
+    try {
+
+        /** 1º forma de fazer */
+        //medir a chamada das funções
+        console.time('medida - promise');
+        const usuario = await obterUsuario();
+        const telefone = await obterTelefone(usuario.id);
+        const endereco = await obterEnderecoAsync(usuario.id);
+
+        console.log(`
+                        Nome: ${usuario.nome},
+                        Endereco: ${endereco.rua}, ${endereco.numero},
+                        Telefone: ${telefone.ddd} - ${telefone.numero}
+                    `);
+        
+        console.timeEnd('medida - promise');
+
+    } catch (error) {
+        console.error("Deu ruim ",error);
+    }
+}
+
+//A5 mód 1. Refatorando callbacks para promises
+//  const usuarioPromise = obterUsuario();
+//  //Para manipular com sucesso usar .then
+//  //Para manipular com erros usar .catch
+//  usuarioPromise
+//     .then(function(usuario){
+//         return obterTelefone(usuario.id)
+//         .then(function resolverTelefone(result){
+//             return {
+//                 usuario: {
+//                     id: usuario.id,
+//                     nome: usuario.nome
+//                 },
+//                 telefone: result 
+//             }
+//         })
+//     })
+//     .then(function (resultado){
+//         const endereco = obterEnderecoAsync(resultado.usuario.id)
+//         return endereco.then(function resolverEndereco(result){
+//             return {
+//                 usuario: resultado.usuario,
+//                 telefone : resultado.telefone,
+//                 endereco: result
+//             }
+//         })
+//     })
+//     .then(function(resultado){
+//        //console.log('resultado', resultado);
+//        console.log(`
+//                 Nome: ${resultado.usuario.nome},
+//                 Endereco: ${resultado.endereco.rua}, ${resultado.endereco.numero},
+//                 Telefone: ${resultado.telefone.ddd} - ${resultado.telefone.numero}
+//             `);
+//     })
+//     //caso de erro cai neste geral
+//     .catch(function(error){
+//         console.error('erro usuario ', error);
+//     })
 
  
 
