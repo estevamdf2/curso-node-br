@@ -2,12 +2,15 @@
   "name": "curso-node-br",
   "version": "1.0.0",
   "description": "projeto inicial node br.  https://cursos.nodebr.org/courses",
-  "main": "index.js",  
+  "main": "index.js",
   "scripts": {
-    "dev":"node index.js",
+    "dev": "node index.js",
     "dev:event": "node eventEmitter/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
 }
